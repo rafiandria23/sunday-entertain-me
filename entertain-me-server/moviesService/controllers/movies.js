@@ -62,7 +62,7 @@ class MovieController {
       const result = await movies.findOneAndUpdate(
         { _id: ObjectId(movieId) },
         { $set: movieData },
-        { returnNewDocument: true }
+        { returnOriginal: false }
       );
       res.status(200).json({ result });
     } catch (err) {

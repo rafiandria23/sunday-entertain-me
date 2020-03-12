@@ -21,11 +21,4 @@ module.exports = async (req, res, next) => {
   } catch (err) {
     next(err);
   }
-  // client.connect()
-  //   .then(() => {
-  //     const db = client.db(dbName);
-  //     req.db = db;
-  //     next();
-  //   })
-  //   .catch(err => next(err));
 };

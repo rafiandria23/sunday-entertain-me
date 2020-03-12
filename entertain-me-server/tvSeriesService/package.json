@@ -1,0 +1,29 @@
+{
+  "name": "entertainme-server-tvseries-service",
+  "version": "1.0.0",
+  "description": "A Microservice for Entertain ME Server TV Series Category.",
+  "main": "app.js",
+  "scripts": {
+    "test": "jest",
+    "dev": "NODE_ENV=development nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rafiandria23/entertain-me.git"
+  },
+  "keywords": [
+    "express",
+    "mongodb"
+  ],
+  "author": "Adam Rafiandri",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rafiandria23/entertain-me/issues"
+  },
+  "homepage": "https://github.com/rafiandria23/entertain-me#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "mongodb": "^3.5.5"
+  }
+}

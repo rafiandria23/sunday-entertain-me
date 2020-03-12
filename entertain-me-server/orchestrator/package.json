@@ -1,0 +1,30 @@
+{
+  "name": "entertain-me-server",
+  "version": "1.0.0",
+  "description": "Hacktiv8 Phase 3 Week 2 MongoDB Anchor",
+  "main": "app.js",
+  "scripts": {
+    "test": "jest",
+    "dev": "NODE_ENV=development nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rafiandria23/entertain-me.git"
+  },
+  "keywords": [
+    "express",
+    "redis"
+  ],
+  "author": "Adam Rafiandri",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rafiandria23/entertain-me/issues"
+  },
+  "homepage": "https://github.com/rafiandria23/entertain-me#readme",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "ioredis": "^4.16.0"
+  }
+}

@@ -22,10 +22,15 @@
   },
   "homepage": "https://github.com/rafiandria23/entertain-me#readme",
   "dependencies": {
+    "apollo-server": "^2.11.0",
     "axios": "^0.19.2",
     "cors": "^2.8.5",
     "express": "^4.17.1",
+    "graphql": "^14.6.0",
     "http-errors": "^1.7.3",
     "ioredis": "^4.16.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.2"
   }
 }

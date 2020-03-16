@@ -114,7 +114,7 @@ class TvSeriesController {
         return {
           title: tv.title,
           overview: tv.overview,
-          poster_path: tv.poster_path,
+          poster_path: `https://image.tmdb.org/t/p/w500${tv.poster_path}`,
           popularity: tv.popularity,
           tags
         };

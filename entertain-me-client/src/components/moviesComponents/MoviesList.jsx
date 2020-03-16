@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-// import { useSelector, useDispatch } from 'react-redux';
-import { gql } from 'apollo-boost';
 import { useQuery } from '@apollo/react-hooks';
 
 import { Fab, Paper, CircularProgress } from '@material-ui/core';
@@ -9,6 +7,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 import AddMovieForm from './AddMovieForm';
 import MovieItem from './MovieItem';
+import { FETCH_ALL_MOVIES } from '../../schemas/moviesSchemas';
 
 const useStyles = makeStyles(theme => ({
   moviesList: {
@@ -36,19 +35,6 @@ const useStyles = makeStyles(theme => ({
     position: 'fixed'
   }
 }));
-
-const FETCH_ALL_MOVIES = gql`
-  query {
-    movies {
-      _id
-      title
-      overview
-      poster_path
-      popularity
-      tags
-    }
-  }
-`;
 
 export default props => {
   const classes = useStyles();
@@ -115,7 +101,10 @@ export default props => {
       )}
       {addMovieForm && (
         <Paper elevation={5} className={classes.addMovieForm}>
-          <AddMovieForm refetchMovies={refetch} />
+          <AddMovieForm
+            refetchMovies={refetch}
+            handleAddMovieForm={handleAddMovieForm}
+          />
         </Paper>
       )}
     </>

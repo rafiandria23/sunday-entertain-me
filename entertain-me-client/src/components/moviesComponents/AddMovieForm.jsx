@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { TextField, Button, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import { gql } from 'apollo-boost';
 import { useMutation } from '@apollo/react-hooks';
+import { useHistory } from 'react-router-dom';
+
+import { ADD_MOVIE } from '../../schemas/moviesSchemas';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -17,33 +19,6 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const ADD_MOVIE = gql`
-  mutation AddMovie(
-    $title: String!
-    $overview: String!
-    $poster_path: String
-    $popularity: Float
-    $tags: String
-  ) {
-    addMovie(
-      title: $title
-      overview: $overview
-      poster_path: $poster_path
-      popularity: $popularity
-      tags: $tags
-    ) {
-      addMovie(
-        _id: _id
-        title: title
-        overview: overview
-        poster_path: poster_path
-        popularity: popularity
-        tags: tags
-      ) @client
-    }
-  }
-`;
-
 export default props => {
   const classes = useStyles();
   const [title, setMovieTitle] = useState('');
@@ -53,7 +28,8 @@ export default props => {
   const [poster_path, setPosterPath] = useState('');
   const [tags, setTags] = useState('');
   const [addMovie] = useMutation(ADD_MOVIE);
-  const { refetchMovies } = props;
+  const { refetchMovies, handleAddMovieForm } = props;
+  const history = useHistory();
 
   const handleTitleChange = e => {
     setMovieTitle(e.target.value);
@@ -86,6 +62,8 @@ export default props => {
     };
     addMovie({ variables: addMovieData });
     refetchMovies();
+    history.push('/movies');
+    handleAddMovieForm();
   };
 
   return (

@@ -17,8 +17,11 @@ import {
 import { ArrowBackIos as ArrowBackIosIcon } from '@material-ui/icons';
 import { makeStyles } from '@material-ui/core/styles';
 
-import { UpdateMovieForm } from '../../components';
-import { FIND_ONE_MOVIE, FETCH_ALL_MOVIES } from '../../schemas/moviesSchemas';
+import { UpdateTvSeriesForm } from '..';
+import {
+  FIND_ONE_TV_SERIES,
+  FETCH_ALL_TV_SERIES
+} from '../../schemas/tvSeriesSchemas';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -59,12 +62,12 @@ const useStyles = makeStyles(theme => ({
 
 export default props => {
   const classes = useStyles();
-  const { movieId } = useParams();
+  const { tvSeriesId } = useParams();
   const history = useHistory();
   const [val, setVal] = useState(0);
-  const { refetch } = useQuery(FETCH_ALL_MOVIES);
-  const { loading, error, data } = useQuery(FIND_ONE_MOVIE, {
-    variables: { _id: movieId }
+  const { refetch } = useQuery(FETCH_ALL_TV_SERIES);
+  const { loading, error, data } = useQuery(FIND_ONE_TV_SERIES, {
+    variables: { _id: tvSeriesId }
   });
 
   if (loading) {
@@ -79,23 +82,23 @@ export default props => {
     history.goBack();
   };
 
-  const renderMovieDetails = () => {
-    if (data.findOneMovie) {
-      const selectedMovie = data.findOneMovie;
+  const renderTvSeriesDetails = () => {
+    if (data.findOneTvSeries) {
+      const selectedTvSeries = data.findOneTvSeries;
       return (
         <Card className={classes.root}>
           <CardContent>
             <Typography variant='h5' component='h2'>
-              {selectedMovie.title}
+              {selectedTvSeries.title}
             </Typography>
             <Typography className={classes.pos} color='textSecondary'>
-              {selectedMovie.overview}
+              {selectedTvSeries.overview}
             </Typography>
             <Typography className={classes.pos} color='textSecondary'>
-              {selectedMovie.popularity}
+              {selectedTvSeries.popularity}
             </Typography>
             <Typography className={classes.pos} color='textSecondary'>
-              {selectedMovie.tags.join(', ')}
+              {selectedTvSeries.tags.join(', ')}
             </Typography>
             <Button
               variant='contained'
@@ -113,10 +116,13 @@ export default props => {
   };
 
   const renderUpdateForm = () => {
-    if (data.findOneMovie) {
-      const selectedMovie = data.findOneMovie;
+    if (data.findOneTvSeries) {
+      const selectedTvSeries = data.findOneTvSeries;
       return (
-        <UpdateMovieForm movieData={selectedMovie} refetchMovies={refetch} />
+        <UpdateTvSeriesForm
+          tvSeriesData={selectedTvSeries}
+          refetchTvSeries={refetch}
+        />
       );
     }
   };
@@ -128,15 +134,15 @@ export default props => {
           <Tabs
             value={val}
             onChange={handleTabChange}
-            aria-label='Contact Category Tabs'
+            aria-label='TV Series Option Tabs'
           >
-            <Tab label='Movie Details' {...a11yProps(0)} />
-            <Tab label='Update / Delete Movie' {...a11yProps(1)} />
+            <Tab label='TV Series Details' {...a11yProps(0)} />
+            <Tab label='Update / Delete TV Series' {...a11yProps(1)} />
           </Tabs>
         </AppBar>
 
         <TabPanel value={val} index={0}>
-          {renderMovieDetails()}
+          {renderTvSeriesDetails()}
         </TabPanel>
         <TabPanel value={val} index={1}>
           {renderUpdateForm()}

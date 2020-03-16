@@ -4,7 +4,13 @@ import { useSelector } from 'react-redux';
 import { Container } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
 
-import { Header, MovieList, MovieDetail } from './components';
+import {
+  Header,
+  MovieList,
+  MovieDetail,
+  TvSeriesList,
+  TvSeriesDetail
+} from './components';
 
 const useStyles = makeStyles(theme => ({
   mainContainer: {
@@ -32,6 +38,14 @@ function App() {
 
           <Route path='/movies'>
             <MovieList searchQuery={searchQuery} />
+          </Route>
+
+          <Route path='/tv/:tvSeriesId'>
+            <TvSeriesDetail />
+          </Route>
+
+          <Route path='/tv'>
+            <TvSeriesList searchQuery={searchQuery} />
           </Route>
         </Switch>
       </Container>

@@ -22,7 +22,6 @@ export const addMovie = (_, variable, client) => {
 
 export const updateMovie = (_, variable, client) => {
   const { movies } = client.cache.readQuery({ query: ALL_MOVIES });
-  console.log(variable);
   const updatedMovie = {
     __typename: 'Movie',
     title: variable.title,

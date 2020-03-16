@@ -4,7 +4,10 @@ import { makeStyles } from '@material-ui/core/styles';
 import { useMutation } from '@apollo/react-hooks';
 import { useHistory } from 'react-router-dom';
 
-import { UPDATE_MOVIE, DELETE_MOVIE } from '../../schemas/moviesSchemas';
+import {
+  UPDATE_TV_SERIES,
+  DELETE_TV_SERIES
+} from '../../schemas/tvSeriesSchemas';
 import { useParams } from 'react-router-dom';
 
 const useStyles = makeStyles(theme => ({
@@ -25,20 +28,20 @@ const useStyles = makeStyles(theme => ({
 
 export default props => {
   const classes = useStyles();
-  const { movieId } = useParams();
+  const { tvSeriesId } = useParams();
   const history = useHistory();
-  const { movieData, refetchMovies } = props;
-  const [title, setMovieTitle] = useState(movieData.title);
-  const [overview, setMovieOverview] = useState(movieData.overview);
+  const { tvSeriesData, refetchTvSeries } = props;
+  const [title, setTvSeriesTitle] = useState(tvSeriesData.title);
+  const [overview, setTvSeriesOverview] = useState(tvSeriesData.overview);
   // change below to FLOAT DATA TYPE!!
-  const [popularity, setMoviePopularity] = useState(movieData.popularity);
-  const [poster_path, setPosterPath] = useState(movieData.poster_path);
-  const [tags, setTags] = useState(movieData.tags.join(', '));
-  const [updateMovie] = useMutation(UPDATE_MOVIE);
-  const [deleteMovie] = useMutation(DELETE_MOVIE);
+  const [popularity, setTvSeriesPopularity] = useState(tvSeriesData.popularity);
+  const [poster_path, setPosterPath] = useState(tvSeriesData.poster_path);
+  const [tags, setTags] = useState(tvSeriesData.tags.join(', '));
+  const [updateTvSeries] = useMutation(UPDATE_TV_SERIES);
+  const [deleteTvSeries] = useMutation(DELETE_TV_SERIES);
 
   const handleTitleChange = e => {
-    setMovieTitle(e.target.value);
+    setTvSeriesTitle(e.target.value);
   };
 
   const handlePosterPathChange = e => {
@@ -46,40 +49,40 @@ export default props => {
   };
 
   const handleOverviewChange = e => {
-    setMovieOverview(e.target.value);
+    setTvSeriesOverview(e.target.value);
   };
 
   const handlePopularityChange = e => {
-    setMoviePopularity(e.target.value);
+    setTvSeriesPopularity(e.target.value);
   };
 
   const handleTagsChange = e => {
     setTags(e.target.value);
   };
 
-  const handleUpdateMovie = async e => {
+  const handleUpdateTvSeries = async e => {
     e.preventDefault();
-    const updateMovieData = {
-      _id: movieId,
+    const updateTvSeriesData = {
+      _id: tvSeriesId,
       title,
       overview,
       popularity: parseFloat(popularity),
       poster_path,
       tags
     };
-    updateMovie({ variables: updateMovieData });
-    await refetchMovies();
-    history.push('/movies');
+    updateTvSeries({ variables: updateTvSeriesData });
+    await refetchTvSeries();
+    history.push('/tv');
   };
 
-  const handleDeleteMovie = async e => {
-    deleteMovie({
+  const handleDeleteTvSeries = async e => {
+    deleteTvSeries({
       variables: {
-        _id: movieId
+        _id: tvSeriesId
       }
     });
-    await refetchMovies();
-    history.push('/movies');
+    await refetchTvSeries();
+    history.push('/tv');
   };
 
   return (
@@ -88,7 +91,7 @@ export default props => {
         className={classes.root}
         validate='true'
         autoComplete='on'
-        onSubmit={handleUpdateMovie}
+        onSubmit={handleUpdateTvSeries}
       >
         <Typography variant='h5'>{title}</Typography>
 
@@ -134,9 +137,9 @@ export default props => {
         <Button
           variant='outlined'
           color='secondary'
-          onClick={handleDeleteMovie}
+          onClick={handleDeleteTvSeries}
         >
-          Delete Movie
+          Delete TV Series
         </Button>
       </div>
     </Container>

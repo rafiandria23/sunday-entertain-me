@@ -112,7 +112,7 @@ class TvSeriesController {
             return tag[0].name;
           });
         return {
-          title: tv.title,
+          title: tv.name,
           overview: tv.overview,
           poster_path: `https://image.tmdb.org/t/p/w500${tv.poster_path}`,
           popularity: tv.popularity,

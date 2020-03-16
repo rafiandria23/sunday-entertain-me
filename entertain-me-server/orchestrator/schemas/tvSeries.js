@@ -16,7 +16,7 @@ const tvSeriesSchema = makeExecutableSchema({
       overview: String
       poster_path: String
       popularity: Float
-      tags: String
+      tags: [String]
     }
 
     type Query {

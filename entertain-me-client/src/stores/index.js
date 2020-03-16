@@ -1,12 +1,24 @@
-import { createStore, combineReducers } from 'redux';
+import { createStore } from 'redux';
 
-import { moviesReducer, tvSeriesReducer } from '../reducers';
+const initialState = {
+  searchQuery: ''
+};
 
-const reducers = combineReducers({
-  moviesReducer,
-  tvSeriesReducer
+export const searchOnChange = searchQuery => ({
+  type: 'SEARCH',
+  payload: {
+    searchQuery
+  }
 });
 
-const store = createStore(reducers);
+const reducer = (state = initialState, action) => {
+  switch (action.type) {
+    case 'SEARCH':
+      return { ...state, searchQuery: action.payload.searchQuery };
 
-export default store;
+    default:
+      return state;
+  }
+};
+
+export const store = createStore(reducer);

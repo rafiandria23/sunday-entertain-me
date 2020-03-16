@@ -1,25 +1,26 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Route, Switch, Redirect } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+
+import { Header, MovieList } from './components';
 
 function App() {
+  const searchQuery = useSelector(state => state.searchQuery);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Header />
+
+      <Switch>
+        <Route path='/' exact>
+          <Redirect to='/movies' />
+        </Route>
+
+        <Route path='/movies'>
+          <MovieList searchQuery={searchQuery} />
+        </Route>
+      </Switch>
+    </>
   );
 }
 

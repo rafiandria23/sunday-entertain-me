@@ -17,7 +17,6 @@ import MovieItemMenu from './MovieItemMenu';
 
 const useStyles = makeStyles(theme => ({
   root: {
-    maxWidth: 345,
     margin: '3vh'
   },
   media: {

@@ -71,7 +71,10 @@ export default props => {
     const { searchQuery } = props;
     if (searchQuery.length > 0) {
       const filteredMovies = data.movies.filter(movie => {
-        return movie.tags.toLowerCase().includes(searchQuery.toLowerCase());
+        return movie.tags
+          .join(', ')
+          .toLowerCase()
+          .includes(searchQuery.toLowerCase());
       });
       return filteredMovies.map(movie => {
         return <MovieItem key={movie._id} movieData={movie} />;

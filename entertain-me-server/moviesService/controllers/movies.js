@@ -112,7 +112,7 @@ class MovieController {
         return {
           title: movie.title,
           overview: movie.overview,
-          poster_path: movie.poster_path,
+          poster_path: `https://image.tmdb.org/t/p/w500${movie.poster_path}`,
           popularity: movie.popularity,
           tags
         };

@@ -1,5 +1,8 @@
 'use strict';
 
+const TMDB_API_KEY = process.env.TMDB_API_KEY;
+const axios = require('axios');
+
 class TvSeriesController {
   static async create(req, res, next) {
     try {
@@ -80,6 +83,45 @@ class TvSeriesController {
         { returnOriginal: true }
       );
       res.status(200).json({ result });
+    } catch (err) {
+      next(err);
+    }
+  }
+
+  static async seedTvSeries(req, res, next) {
+    try {
+      const db = req.db;
+      const {
+        data: { genres }
+      } = await axios.get(
+        `https://api.themoviedb.org/3/genre/tv/list?api_key=${TMDB_API_KEY}`
+      );
+      const {
+        data: { results }
+      } = await axios.get(
+        `https://api.themoviedb.org/3/discover/tv?api_key=${TMDB_API_KEY}&region=US`
+      );
+
+      const tvSeries = results.map(tv => {
+        const tags = tv.genre_ids
+          .map(tag => {
+            return genres.filter(genre => genre.id === tag);
+          })
+          .filter(tag => tag.length > 0)
+          .map(tag => {
+            return tag[0].name;
+          });
+        return {
+          title: tv.title,
+          overview: tv.overview,
+          poster_path: tv.poster_path,
+          popularity: tv.popularity,
+          tags
+        };
+      });
+
+      const result = await db.collection('TV Series').insertMany(tvSeries);
+      res.status(201).json({ result: tvSeries });
     } catch (err) {
       next(err);
     }

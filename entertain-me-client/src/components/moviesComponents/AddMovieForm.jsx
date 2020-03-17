@@ -68,31 +68,31 @@ export default props => {
 
   return (
     <form className={classes.root} onSubmit={handleAddMovie}>
-      <Typography variant='h5'>Add Movie Form</Typography>
+      <Typography variant='h5'>Add Movie</Typography>
 
       <TextField
-        label='Movie Title'
+        label='Title'
         variant='outlined'
         onChange={handleTitleChange}
         value={title}
       />
 
       <TextField
-        label='Movie Overview'
+        label='Overview'
         variant='outlined'
         onChange={handleOverviewChange}
         value={overview}
       />
 
       <TextField
-        label='Movie Popularity'
+        label='Popularity'
         variant='outlined'
         onChange={handlePopularityChange}
         value={popularity}
       />
 
       <TextField
-        label='Movie Poster URL'
+        label='Poster URL'
         variant='outlined'
         onChange={handlePosterPathChange}
         value={poster_path}

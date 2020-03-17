@@ -68,7 +68,7 @@ export default props => {
 
   return (
     <form className={classes.root} onSubmit={handleAddTvSeries}>
-      <Typography variant='h5'>Add Movie Form</Typography>
+      <Typography variant='h5'>Add TV Series</Typography>
 
       <TextField
         label='Movie Title'
@@ -105,7 +105,7 @@ export default props => {
         value={tags}
       />
       <Button type='submit' variant='contained' color='primary'>
-        Add Movie
+        Add TV Series
       </Button>
     </form>
   );

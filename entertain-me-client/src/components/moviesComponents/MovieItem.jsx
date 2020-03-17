@@ -4,6 +4,8 @@ import {
   CardHeader,
   CardMedia,
   CardActions,
+  CardActionArea,
+  CardContent,
   IconButton,
   Typography
 } from '@material-ui/core';
@@ -17,11 +19,12 @@ import MovieItemMenu from './MovieItemMenu';
 
 const useStyles = makeStyles(theme => ({
   root: {
-    margin: '3vh'
+    margin: '3vh',
+    maxWidth: 345
   },
   media: {
-    height: 0,
-    paddingTop: '56.25%' // 16:9
+    height: 600
+    // paddingTop: '56.25%' // 16:9
   },
   trafficDetail: {
     margin: 'auto 0.3vh',
@@ -86,18 +89,28 @@ export default props => {
         handleClose={handleClose}
       />
       <CardMedia className={classes.media} image={movieData.poster_path} />
-      <CardActions disableSpacing>
-        <div className={classes.trafficDetail}>
-          <IconButton aria-label='Tags'>
-            <LocalOfferIcon />
-          </IconButton>
-          <Typography variant='body2' color='textSecondary' component='p'>
-            {movieData.tags
-              .map(tag => `${tag[0].toUpperCase()}${tag.slice(1)}`)
-              .join(', ')}
-          </Typography>
-        </div>
-      </CardActions>
+      <CardContent>
+        <Typography gutterBottom variant='h5' component='h2'>
+          {movieData.title}
+        </Typography>
+        <Typography variant='body2' color='textSecondary' component='p'>
+          {movieData.overview}
+        </Typography>
+      </CardContent>
+      <CardActionArea>
+        <CardActions disableSpacing>
+          <div className={classes.trafficDetail}>
+            <IconButton aria-label='Tags'>
+              <LocalOfferIcon />
+            </IconButton>
+            <Typography variant='body2' color='textSecondary' component='p'>
+              {movieData.tags
+                .map(tag => `${tag[0].toUpperCase()}${tag.slice(1)}`)
+                .join(', ')}
+            </Typography>
+          </div>
+        </CardActions>
+      </CardActionArea>
     </Card>
   );
 };

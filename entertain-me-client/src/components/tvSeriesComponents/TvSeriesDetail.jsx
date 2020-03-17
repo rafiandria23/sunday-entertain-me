@@ -12,7 +12,8 @@ import {
   Card,
   CardContent,
   CircularProgress,
-  Button
+  Button,
+  CardMedia
 } from '@material-ui/core';
 import { ArrowBackIos as ArrowBackIosIcon } from '@material-ui/icons';
 import { makeStyles } from '@material-ui/core/styles';
@@ -56,7 +57,20 @@ function a11yProps(index) {
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
-    backgroundColor: theme.palette.background.paper
+    backgroundColor: theme.palette.background.paper,
+    width: 600
+  },
+  tvSeriesDetailContainer: {
+    display: 'flex',
+    justifyContent: 'center'
+  },
+  media: {
+    height: 600
+  },
+  tvSeriesDetailImageContainer: {
+    marginRight: 30,
+    height: 600,
+    width: 345
   }
 }));
 
@@ -80,6 +94,19 @@ export default props => {
 
   const clickGoBack = () => {
     history.goBack();
+  };
+
+  const renderTvSeriesDetailImage = () => {
+    if (data.findOneTvSeries) {
+      const selectedTvSeries = data.findOneTvSeries;
+      return (
+        <CardMedia
+          className={classes.media}
+          image={selectedTvSeries.poster_path}
+          title={selectedTvSeries.title}
+        />
+      );
+    }
   };
 
   const renderTvSeriesDetails = () => {
@@ -122,22 +149,28 @@ export default props => {
     if (data.findOneTvSeries) {
       const selectedTvSeries = data.findOneTvSeries;
       return (
-        <UpdateTvSeriesForm
-          tvSeriesData={selectedTvSeries}
-          refetchTvSeries={refetch}
-        />
+        <div className={classes.root}>
+          <UpdateTvSeriesForm
+            tvSeriesData={selectedTvSeries}
+            refetchTvSeries={refetch}
+          />
+        </div>
       );
     }
   };
 
   return (
-    <Container>
-      <div className={classes.root}>
+    <Container className={classes.tvSeriesDetailContainer}>
+      <Card className={classes.tvSeriesDetailImageContainer}>
+        {renderTvSeriesDetailImage()}
+      </Card>
+      <div>
         <AppBar position='static'>
           <Tabs
             value={val}
             onChange={handleTabChange}
             aria-label='TV Series Option Tabs'
+            centered
           >
             <Tab label='TV Series Details' {...a11yProps(0)} />
             <Tab label='Update / Delete TV Series' {...a11yProps(1)} />

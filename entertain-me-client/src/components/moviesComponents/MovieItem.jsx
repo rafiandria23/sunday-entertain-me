@@ -10,7 +10,7 @@ import {
   Typography
 } from '@material-ui/core';
 import {
-  // Favorite as FavoriteIcon,
+  Public as PublicIcon,
   MoreVert as MoreVertIcon,
   LocalOffer as LocalOfferIcon
 } from '@material-ui/icons';
@@ -107,6 +107,14 @@ export default props => {
               {movieData.tags
                 .map(tag => `${tag[0].toUpperCase()}${tag.slice(1)}`)
                 .join(', ')}
+            </Typography>
+          </div>
+          <div className={classes.trafficDetail}>
+            <IconButton aria-label='Tags'>
+              <PublicIcon />
+            </IconButton>
+            <Typography variant='body2' color='textSecondary' component='p'>
+              {movieData.popularity}
             </Typography>
           </div>
         </CardActions>

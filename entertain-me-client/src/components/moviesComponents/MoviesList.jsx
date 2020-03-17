@@ -5,8 +5,7 @@ import { Fab, Paper, CircularProgress } from '@material-ui/core';
 import { Add as AddIcon, Remove as RemoveIcon } from '@material-ui/icons';
 import { makeStyles } from '@material-ui/core/styles';
 
-import AddMovieForm from './AddMovieForm';
-import MovieItem from './MovieItem';
+import { AddMovieForm, MovieItem, TitleComponent } from '../../components';
 import { FETCH_ALL_MOVIES } from '../../schemas/moviesSchemas';
 
 const useStyles = makeStyles(theme => ({
@@ -78,6 +77,7 @@ export default props => {
 
   return (
     <>
+      <TitleComponent title='Movie List' />
       <div className={classes.moviesList} onMouseDown={closeAddMovieForm}>
         {handleRender()}
       </div>

@@ -1,6 +1,7 @@
 // GENERAL COMPONENTS
 export { default as Header } from './Header';
 export { default as LeftDrawer } from './LeftDrawer';
+export { default as TitleComponent } from './TitleComponent';
 
 // MOVIES COMPONENTS
 export { default as AddMovieForm } from './moviesComponents/AddMovieForm';

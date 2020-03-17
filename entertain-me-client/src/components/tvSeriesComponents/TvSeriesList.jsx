@@ -5,8 +5,11 @@ import { Fab, Paper, CircularProgress } from '@material-ui/core';
 import { Add as AddIcon, Remove as RemoveIcon } from '@material-ui/icons';
 import { makeStyles } from '@material-ui/core/styles';
 
-import AddTvSeriesForm from './AddTvSeriesForm';
-import TvSeriesItem from './TvSeriesItem';
+import {
+  AddTvSeriesForm,
+  TvSeriesItem,
+  TitleComponent
+} from '../../components';
 import { FETCH_ALL_TV_SERIES } from '../../schemas/tvSeriesSchemas';
 
 const useStyles = makeStyles(theme => ({
@@ -82,6 +85,7 @@ export default props => {
 
   return (
     <>
+      <TitleComponent title='TV Series List' />
       <div className={classes.tvSeriesList} onMouseDown={closeAddTvSeriesForm}>
         {handleRender()}
       </div>

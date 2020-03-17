@@ -17,7 +17,7 @@ import {
 import { ArrowBackIos as ArrowBackIosIcon } from '@material-ui/icons';
 import { makeStyles } from '@material-ui/core/styles';
 
-import { UpdateMovieForm } from '../../components';
+import { UpdateMovieForm, TitleComponent } from '../../components';
 import { FIND_ONE_MOVIE, FETCH_ALL_MOVIES } from '../../schemas/moviesSchemas';
 
 function TabPanel(props) {
@@ -83,31 +83,34 @@ export default props => {
     if (data.findOneMovie) {
       const selectedMovie = data.findOneMovie;
       return (
-        <Card className={classes.root}>
-          <CardContent>
-            <Typography variant='h5' component='h2'>
-              {selectedMovie.title}
-            </Typography>
-            <Typography className={classes.pos} color='textSecondary'>
-              {selectedMovie.overview}
-            </Typography>
-            <Typography className={classes.pos} color='textSecondary'>
-              {selectedMovie.popularity}
-            </Typography>
-            <Typography className={classes.pos} color='textSecondary'>
-              {selectedMovie.tags.join(', ')}
-            </Typography>
-            <Button
-              variant='contained'
-              color='primary'
-              className={classes.button}
-              startIcon={<ArrowBackIosIcon />}
-              onClick={clickGoBack}
-            >
-              Back
-            </Button>
-          </CardContent>
-        </Card>
+        <>
+          <TitleComponent title={selectedMovie.title} />
+          <Card className={classes.root}>
+            <CardContent>
+              <Typography variant='h5' component='h2'>
+                {selectedMovie.title}
+              </Typography>
+              <Typography className={classes.pos} color='textSecondary'>
+                {selectedMovie.overview}
+              </Typography>
+              <Typography className={classes.pos} color='textSecondary'>
+                {selectedMovie.popularity}
+              </Typography>
+              <Typography className={classes.pos} color='textSecondary'>
+                {selectedMovie.tags.join(', ')}
+              </Typography>
+              <Button
+                variant='contained'
+                color='primary'
+                className={classes.button}
+                startIcon={<ArrowBackIosIcon />}
+                onClick={clickGoBack}
+              >
+                Back
+              </Button>
+            </CardContent>
+          </Card>
+        </>
       );
     }
   };

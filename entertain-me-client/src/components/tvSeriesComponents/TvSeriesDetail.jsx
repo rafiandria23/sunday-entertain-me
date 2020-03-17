@@ -17,7 +17,7 @@ import {
 import { ArrowBackIos as ArrowBackIosIcon } from '@material-ui/icons';
 import { makeStyles } from '@material-ui/core/styles';
 
-import { UpdateTvSeriesForm } from '..';
+import { UpdateTvSeriesForm, TitleComponent } from '../../components';
 import {
   FIND_ONE_TV_SERIES,
   FETCH_ALL_TV_SERIES
@@ -86,31 +86,34 @@ export default props => {
     if (data.findOneTvSeries) {
       const selectedTvSeries = data.findOneTvSeries;
       return (
-        <Card className={classes.root}>
-          <CardContent>
-            <Typography variant='h5' component='h2'>
-              {selectedTvSeries.title}
-            </Typography>
-            <Typography className={classes.pos} color='textSecondary'>
-              {selectedTvSeries.overview}
-            </Typography>
-            <Typography className={classes.pos} color='textSecondary'>
-              {selectedTvSeries.popularity}
-            </Typography>
-            <Typography className={classes.pos} color='textSecondary'>
-              {selectedTvSeries.tags.join(', ')}
-            </Typography>
-            <Button
-              variant='contained'
-              color='primary'
-              className={classes.button}
-              startIcon={<ArrowBackIosIcon />}
-              onClick={clickGoBack}
-            >
-              Back
-            </Button>
-          </CardContent>
-        </Card>
+        <>
+          <TitleComponent title={selectedTvSeries.title} />
+          <Card className={classes.root}>
+            <CardContent>
+              <Typography variant='h5' component='h2'>
+                {selectedTvSeries.title}
+              </Typography>
+              <Typography className={classes.pos} color='textSecondary'>
+                {selectedTvSeries.overview}
+              </Typography>
+              <Typography className={classes.pos} color='textSecondary'>
+                {selectedTvSeries.popularity}
+              </Typography>
+              <Typography className={classes.pos} color='textSecondary'>
+                {selectedTvSeries.tags.join(', ')}
+              </Typography>
+              <Button
+                variant='contained'
+                color='primary'
+                className={classes.button}
+                startIcon={<ArrowBackIosIcon />}
+                onClick={clickGoBack}
+              >
+                Back
+              </Button>
+            </CardContent>
+          </Card>
+        </>
       );
     }
   };

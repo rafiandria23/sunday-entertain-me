@@ -19,6 +19,10 @@ services:
       - '/usr/local/application/node_modules'
     ports:
       - '4000:4000'
+    depends_on:
+      - mongodb
+    links:
+      - mongodb
   movies:
     build:
       context: ./microservices/movies
@@ -28,6 +32,8 @@ services:
       - '/usr/local/application/node_modules'
     ports:
       - '3001:3001'
+    depends_on:
+      - mongodb
     links:
       - mongodb
   tv:
@@ -39,6 +45,8 @@ services:
       - '/usr/local/application/node_modules'
     ports:
       - '3002:3002'
+    depends_on:
+      - mongodb
     links:
       - mongodb
 

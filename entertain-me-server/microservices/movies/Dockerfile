@@ -20,8 +20,6 @@ COPY . .
 
 EXPOSE 3001
 
-RUN node seed.js
-
 ENTRYPOINT [ "/sbin/tini", "--" ]
 
 CMD ["nodemon", "app.js"]

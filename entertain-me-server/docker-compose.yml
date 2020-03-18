@@ -27,6 +27,8 @@ services:
     build:
       context: ./microservices/movies
       dockerfile: Dockerfile
+    env_file:
+      - ./microservices/movies/.env
     volumes:
       - './microservices/movies:/usr/local/application'
       - '/usr/local/application/node_modules'
@@ -40,6 +42,8 @@ services:
     build:
       context: ./microservices/tv
       dockerfile: Dockerfile
+    env_file:
+      - ./microservices/movies/.env
     volumes:
       - './microservices/tv:/usr/local/application'
       - '/usr/local/application/node_modules'

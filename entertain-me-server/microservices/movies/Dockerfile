@@ -16,6 +16,8 @@ USER node
 
 RUN npm i && npm cache clean --force
 
+RUN node seed.js
+
 COPY . .
 
 ENTRYPOINT [ "/sbin/tini", "--" ]

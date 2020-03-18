@@ -1,7 +1,7 @@
 'use strict';
 
 const tvSeriesApi = require('axios').default.create({
-  baseURL: `http://localhost:3002`
+  baseURL: `http://tv:3002`
 });
 
 const tvSeriesQueryResolver = {

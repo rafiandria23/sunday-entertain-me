@@ -1,7 +1,7 @@
 'use strict';
 
 const moviesApi = require('axios').default.create({
-  baseURL: `http://localhost:3001`
+  baseURL: `http://movies:3001`
 });
 
 const moviesQueryResolver = {

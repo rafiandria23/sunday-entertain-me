@@ -18,8 +18,6 @@ RUN npm i && npm cache clean --force
 
 COPY . .
 
-RUN node initializeMongoDB.js
-
 EXPOSE 4000
 
 ENTRYPOINT [ "/sbin/tini", "--" ]

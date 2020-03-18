@@ -1,0 +1,42 @@
+version: '3'
+
+services:
+  orchestrator:
+    build:
+      context: ./orchestrator
+      dockerfile: Dockerfile
+    volumes:
+      - './orchestrator:/usr/local/application'
+      - '/usr/local/application/node_modules'
+    ports:
+      - '4000:4000'
+  moviesService:
+    build:
+      context: ./moviesService
+      dockerfile: Dockerfile
+    volumes:
+      - './moviesService:/usr/local/application'
+      - '/usr/local/application/node_modules'
+    ports:
+      - '3001:3001'
+  tvSeriesService:
+    build:
+      context: ./tvSeriesService
+      dockerfile: Dockerfile
+    volumes:
+      - './tvSeriesService:/usr/local/application'
+      - '/usr/local/application/node_modules'
+    ports:
+      - '3002:3002'
+  mongodb:
+    image: mongodb:latest
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: root
+    ports:
+      - 27017:27017
+    volumes:
+      - mongodb_data_container:/data/db
+
+volumes:
+  mongodb_data_container:

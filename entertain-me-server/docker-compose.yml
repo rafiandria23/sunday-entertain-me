@@ -1,6 +1,15 @@
 version: '3'
 
 services:
+  mongodb:
+    image: mongo:latest
+    restart: always
+    ports:
+      - 27018:27017
+    environment:
+      MONGO_INITDB_DATABASE: 'entertainme'
+    volumes:
+      - mongodb_data_container:/data/db
   orchestrator:
     build:
       context: ./orchestrator
@@ -15,28 +24,23 @@ services:
       context: ./microservices/movies
       dockerfile: Dockerfile
     volumes:
-      - './moviesService:/usr/local/application'
+      - './microservices/movies:/usr/local/application'
       - '/usr/local/application/node_modules'
     ports:
       - '3001:3001'
+    links:
+      - mongodb
   tv:
     build:
       context: ./microservices/tv
       dockerfile: Dockerfile
     volumes:
-      - './tvSeriesService:/usr/local/application'
+      - './microservices/tv:/usr/local/application'
       - '/usr/local/application/node_modules'
     ports:
       - '3002:3002'
-  mongodb:
-    image: mongodb:latest
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: root
-    ports:
-      - 27017:27017
-    volumes:
-      - mongodb_data_container:/data/db
+    links:
+      - mongodb
 
 volumes:
   mongodb_data_container:

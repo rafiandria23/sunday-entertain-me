@@ -3,7 +3,7 @@
 const { MongoClient, ObjectId } = require('mongodb');
 
 // Connection URL
-const url = `mongodb://localhost:27017`;
+const url = `mongodb://mongodb:27017`;
 
 // Database Name
 const dbName = 'entertainme';

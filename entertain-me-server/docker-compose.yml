@@ -10,18 +10,18 @@ services:
       - '/usr/local/application/node_modules'
     ports:
       - '4000:4000'
-  moviesService:
+  movies:
     build:
-      context: ./moviesService
+      context: ./microservices/movies
       dockerfile: Dockerfile
     volumes:
       - './moviesService:/usr/local/application'
       - '/usr/local/application/node_modules'
     ports:
       - '3001:3001'
-  tvSeriesService:
+  tv:
     build:
-      context: ./tvSeriesService
+      context: ./microservices/tv
       dockerfile: Dockerfile
     volumes:
       - './tvSeriesService:/usr/local/application'

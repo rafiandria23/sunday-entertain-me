@@ -24,12 +24,22 @@ class MovieController {
 
   static async findAll(req, res, next) {
     try {
+      console.log(req.headers.host);
+
       const db = req.db;
-      const result = await db
+      const resultFromDB = await db
         .collection('Movies')
         .find({})
         .toArray();
-      res.status(200).json({ result });
+
+      if (resultFromDB.length <= 0) {
+        const {
+          data: { result }
+        } = await axios.get(`http://${req.headers.host}/movies/seed`);
+        res.status(200).json({ result });
+      } else {
+        res.status(200).json({ result: resultFromDB });
+      }
     } catch (err) {
       next(err);
     }
@@ -92,6 +102,10 @@ class MovieController {
   static async seedMovies(req, res, next) {
     try {
       const db = req.db;
+      console.log(
+        `https://api.themoviedb.org/3/genre/movie/list?api_key=${TMDB_API_KEY}`
+      );
+
       const {
         data: { genres }
       } = await axios.get(

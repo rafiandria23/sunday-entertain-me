@@ -1,7 +1,7 @@
 'use strict';
 
 const TMDB_API_KEY = process.env.TMDB_API_KEY;
-const axios = require('axios');
+const axios = require('axios').default;
 
 class TvSeriesController {
   static async create(req, res, next) {
@@ -27,8 +27,15 @@ class TvSeriesController {
     try {
       const db = req.db;
       const tvSeries = db.collection('TV Series');
-      const result = await tvSeries.find({}).toArray();
-      res.status(200).json({ result });
+      const resultFromDB = await tvSeries.find({}).toArray();
+      if (resultFromDB.length <= 0) {
+        const {
+          data: { result }
+        } = await axios.get(`http://${req.headers.host}/tv/seed`);
+        res.status(200).json({ result });
+      } else {
+        res.status(200).json({ result: resultFromDB });
+      }
     } catch (err) {
       next(err);
     }

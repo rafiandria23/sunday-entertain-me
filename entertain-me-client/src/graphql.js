@@ -29,7 +29,7 @@ const history = createBrowserHistory();
 // `;
 
 const client = new ApolloClient({
-  uri: 'http://localhost:4000',
+  uri: 'https://ec2-54-153-1-136.us-west-1.compute.amazonaws.com:4000',
   clientState: {
     resolvers: {
       Mutation: {
